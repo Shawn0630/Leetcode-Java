@@ -16,6 +16,7 @@ public class ArrangingCoinsTest {
         assertEquals(2, ac.arrangeCoins(5));
     }
 
+
     @Test
     public void test2() {
         assertEquals(3, ac.arrangeCoins(8));
