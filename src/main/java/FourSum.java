@@ -57,4 +57,28 @@ public class FourSum {
 
         return twoSums;
     }
+
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        if (A == null || B == null || C == null || D == null ||
+            A.length == 0 || B.length == 0 || C.length == 0 || D.length == 0) {
+            return 0;
+        }
+
+        Map<Integer, Integer> ABCount = new HashMap<>();
+
+        for(int i = 0; i < A.length; i++) {
+            for(int j = 0; j < B.length; j++) {
+                ABCount.put(A[i] + B[j], ABCount.getOrDefault(A[i] + B[j], 0) + 1);
+            }
+        }
+
+        int ans = 0;
+        for(int i = 0; i < C.length; i++) {
+            for(int j = 0; j < D.length; j++) {
+               ans += ABCount.getOrDefault(-C[i] - D[j], 0);
+            }
+        }
+
+        return ans;
+    }
 }
