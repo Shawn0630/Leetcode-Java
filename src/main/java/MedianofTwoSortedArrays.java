@@ -50,6 +50,8 @@ public class MedianofTwoSortedArrays {
                 }
         }
 
+        //TODO: Refactor
+
         return findMedianSortedArrays(nums2, nums1);
 
 //        nums1_start = nums1[0] > nums2[nums2.length - 1] ? -1 : 0;
@@ -100,5 +102,73 @@ public class MedianofTwoSortedArrays {
         if(length%2 == 0)
             return (result[length/2]+result[(length/2)-1])/2.0;
         else return result[length/2];
+    }
+
+    public double findMedianSortedArrays3(int[] nums1, int[] nums2) {
+        if(nums1 == null || nums2 == null || (nums1.length == 0 && nums2.length == 0)) {
+            return 0;
+        }
+
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays3(nums2, nums1);
+        }
+
+        int curA = 0;
+        int lastA = nums1.length - 1;
+        int halfLength = (nums1.length + nums2.length) / 2;
+        while (curA <= nums1.length) { // [] [1, 2, 3, 4, 5]
+            /*
+            * 0 | 1
+            * 0 1 | 2 3
+            * indexA = 1
+            * indexB = 3 - 1 = 2
+            *
+            * 0  1 |
+            * 0 | 1  2  3
+            *
+            * indexA = 2
+            * indexB = 3 - 2 = 1
+            *
+            *
+            * | 0  1
+            * 0  1  2 | 3
+            *
+            * indexA = 0
+            * indexB = 3 - 0 = 3
+            *
+            * []
+            * 0  1  | 2  3
+            * indexA = 0
+            * indexB = 2 - 0  2
+            *
+            *
+            * 0 |
+            * | 1  2
+            *
+            * indexA = 1;
+            * indexB = 1 - 1 = 0
+            * */
+            int indexA = curA + (lastA - curA) / 2;
+            int indexB = halfLength - indexA;
+
+            int midA = (indexA >= nums1.length) ? Integer.MAX_VALUE : nums1[indexA];
+            int midA_minus_one = ((indexA - 1) < 0) ? Integer.MIN_VALUE : nums1[indexA - 1];
+            int midB = (indexB >= nums2.length) ? Integer.MAX_VALUE : nums2[indexB];
+            int midB_minus_one = ((indexB - 1) < 0) ? Integer.MIN_VALUE : nums2[indexB - 1];
+
+            if (midA >= midB_minus_one && midB >= midA_minus_one) {
+                if ((nums1.length + nums2.length) % 2 == 0) {
+                    return (Math.max(midA_minus_one, midB_minus_one) + Math.min(midA, midB)) / (double)2;
+                } else {
+                    return Math.min(midA, midB);
+                }
+            } else if (midA_minus_one < midB_minus_one) {
+                curA = indexA + 1;
+            } else {
+                curA = indexA;
+            }
+        }
+
+        return 0;
     }
 }

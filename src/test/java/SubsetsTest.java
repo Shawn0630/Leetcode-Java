@@ -21,6 +21,15 @@ public class SubsetsTest {
                 Arrays.asList(2, 3),
                 Arrays.asList(1, 2),
                 Collections.emptyList()));
+        assertThat(ss.subsets_nodfs(new int[]{1, 2, 3}), containsInAnyOrder(
+                Collections.singletonList(3),
+                Collections.singletonList(1),
+                Collections.singletonList(2),
+                Arrays.asList(1,2,3),
+                Arrays.asList(1, 3),
+                Arrays.asList(2, 3),
+                Arrays.asList(1, 2),
+                Collections.emptyList()));
     }
 
     @Test
