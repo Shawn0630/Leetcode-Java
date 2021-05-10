@@ -1,3 +1,6 @@
+package com.dynamic_programming;
+
+import com.dynamic_programming.BestTimetoBuyandSellStock;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,6 +19,7 @@ public class BestTimetoBuyandSellStockTest {
     public void test2() {
         assertThat(st.maxProfit2(new int[]{7,6,4,3,1}), is(0));
         assertThat(st.maxProfit3(2, new int[]{7,6,4,3,1}), is(0));
+        assertThat(st.maxProfit32(2, new int[]{7,6,4,3,1}), is(0));
     }
 
     @Test
@@ -26,26 +30,31 @@ public class BestTimetoBuyandSellStockTest {
     @Test
     public void test4() {
         assertThat(st.maxProfit3(2, new int[]{3,3,5,0,0,3,1,4}), is(6));
+        assertThat(st.maxProfit32(2, new int[]{3,3,5,0,0,3,1,4}), is(6));
     }
 
     @Test
     public void test5() {
         assertThat(st.maxProfit3(2, new int[]{1,2,3,4,5}), is(4));
+        assertThat(st.maxProfit32(2, new int[]{1,2,3,4,5}), is(4));
     }
 
     @Test
     public void test6() {
         assertThat(st.maxProfit3(2, new int[]{2, 4, 1}), is(2));
+        assertThat(st.maxProfit32(2, new int[]{2, 4, 1}), is(2));
     }
 
     @Test
     public void test7() {
         assertThat(st.maxProfit3(2, new int[]{1, 2, 4}), is(3));
+        assertThat(st.maxProfit32(2, new int[]{1, 2, 4}), is(3));
     }
 
     @Test
     public void test8() {
         assertThat(st.maxProfit3(2, new int[]{3, 2, 6, 5, 0, 3}), is(7));
+        assertThat(st.maxProfit32(2, new int[]{3, 2, 6, 5, 0, 3}), is(7));
     }
 
     @Test

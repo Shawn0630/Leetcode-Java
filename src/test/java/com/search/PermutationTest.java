@@ -1,3 +1,6 @@
+package com.search;
+
+import com.search.Permutations;
 import org.junit.Test;
 
 import java.util.Arrays;

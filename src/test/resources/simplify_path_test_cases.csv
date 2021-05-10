@@ -1,0 +1,9 @@
+input, expected
+/home/, /home
+/../, /
+/home//foo/, /home/foo
+/a/./b/../../c/, /c
+/a//b////c/d//././/..,/a/b/c
+/..., /...
+/.../, /...
+/..hidden, /..hidden

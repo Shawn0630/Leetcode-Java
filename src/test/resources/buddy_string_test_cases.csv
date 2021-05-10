@@ -1,0 +1,6 @@
+A, B, expected
+ab, ba, true
+ab, ab, false
+aa, aa, true
+aaaaaaabc, aaaaaaacb, true
+, aa, false

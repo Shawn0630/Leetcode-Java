@@ -1,3 +1,5 @@
+package com.dynamic_programming;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -93,6 +95,33 @@ public class BestTimetoBuyandSellStock {
         return dp[1][prices.length];
     }
 
+
+    public int maxProfit32(int k, int[] prices) {
+        if (k <= 0 || prices == null || prices.length == 0) {
+            return 0;
+        }
+
+        if (k >=  prices.length / 2) {
+            int maxPro = 0;
+            for (int i = 1; i < prices.length; i++) {
+                if (prices[i] > prices[i-1])
+                    maxPro += prices[i] - prices[i-1];
+            }
+            return maxPro;
+        }
+
+        int[][] dp = new int[k + 1][prices.length];
+        for(int i = 1; i < dp.length; i++) {
+            int localMax = dp[i-1][0] - prices[0];
+            for(int j = 1; j < dp[0].length; j++) {
+                dp[i][j] = Math.max(dp[i][j-1],  prices[j] + localMax);
+                localMax = Math.max(localMax, dp[i-1][j] - prices[j]);
+            }
+        }
+
+        return dp[k][prices.length - 1];
+    }
+
     public int maxProfit4(int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;
@@ -110,5 +139,22 @@ public class BestTimetoBuyandSellStock {
 
 
        return sellHere[prices.length - 1];
+    }
+
+    public int maxProfit(int[] prices, int fee) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+
+        int dp[][] = new int[prices.length][2];
+        dp[0][0] = 0; // sell
+        dp[0][1] = -prices[0]; // buy
+
+        for(int i = 1; i < prices.length; i++) {
+           dp[i][1] = Math.max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
+           dp[i][0] = Math.max(dp[i - 1][1] + prices[i] - fee, dp[i - 1][0]);
+        }
+
+        return dp[prices.length - 1][0];
     }
 }
