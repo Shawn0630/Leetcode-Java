@@ -14,7 +14,7 @@ public class SegmentTree<T> {
     private BiFunction<T, T, T> transformer;
     private SegmentTreeNode<T> root;
     private int length;
-    private TreeVisualizer visualizer;
+    private final TreeVisualizer visualizer;
     private static final String LABEL_FORMAT = "[%d, %d] - %s";
 
     private SegmentTree() {
