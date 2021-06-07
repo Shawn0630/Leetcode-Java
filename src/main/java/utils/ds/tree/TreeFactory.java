@@ -3,7 +3,7 @@ package utils.ds.tree;
 import org.abego.treelayout.TreeForTreeLayout;
 import org.abego.treelayout.util.DefaultTreeForTreeLayout;
 import utils.ds.st.SegmentTreeNode;
-import utils.ds.tree.model.BinaryTreeNode;
+import utils.ds.tree.binarytree.model.BinaryTreeNode;
 import utils.ds.tree.model.TreeNode;
 import utils.ds.tree.visualization.TextInBox;
 

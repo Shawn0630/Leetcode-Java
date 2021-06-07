@@ -1,4 +1,6 @@
-package utils.ds.tree.model;
+package utils.ds.tree.binarytree.model;
+
+import utils.ds.tree.model.TreeNode;
 
 public class BinaryTreeNode<T> extends TreeNode<T> {
     public BinaryTreeNode<T> left;
