@@ -1,0 +1,5 @@
+input, pattern, expected
+ADOBECODEBANC, ABC, BANC
+a, a, a
+a, aa,
+cabwefgewcwaefgcf, cae, cwae
