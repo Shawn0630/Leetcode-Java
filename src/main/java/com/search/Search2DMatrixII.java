@@ -65,4 +65,36 @@ public class Search2DMatrixII {
 //            return matrix[low_x0][low_x1] == target;
 //        }
     }
+
+    // m[i][j] < m[i + 1][j]
+    // m[i][j] < m[i][j + 1]
+
+    // m[ileft][jleft] < target < m[iend][jend] => true, otherwise false
+    // each search interval should satisfy the rule.
+    // imid = (ileft + iend) / 2 ...
+    // case#1: [imid, jmid] = target return true
+    // case#2: [imid, jmid] < target istart = imid || jstart = jmid
+    // case#3: [imid, jmid] > target [istart, jstart] -> [imid, jmid]
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        return searchMatrix2DFS(matrix, target, 0, 0, matrix.length - 1, matrix[0].length - 1);
+    }
+
+    private boolean searchMatrix2DFS(int[][] matrix, int target, int iStart, int jStart, int iEnd, int jEnd) {
+        if (iStart < 0 || iEnd >= matrix.length ||
+            jStart < 0 || jEnd >= matrix[0].length ||
+            iStart > iEnd || jStart > jEnd) {
+            return false;
+        }
+
+        int iMid = iStart + (iEnd - iStart) / 2;
+        int jMid = jStart + (jEnd - jStart) / 2;
+
+        if (matrix[iMid][jMid] == target) {
+            return true;
+        } else if (matrix[iMid][jMid] < target) {
+            return searchMatrix2DFS(matrix, target, iMid + 1, jStart, iEnd, jEnd) || searchMatrix2DFS(matrix, target, iStart, jMid + 1, iEnd, jEnd);
+        } else {
+            return searchMatrix2DFS(matrix, target, iStart, jStart, iEnd, jMid - 1) || searchMatrix2DFS(matrix, target, iStart, jStart, iMid - 1, jEnd);
+        }
+    }
 }

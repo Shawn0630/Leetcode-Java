@@ -25,4 +25,32 @@ public class SingleNumberIII {
 
         return new int[]{one, two};
     }
+
+    private int[] singleNumber2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
+        int xor = 0;
+        for(int num : nums) {
+            xor = xor ^ num;
+        }
+
+        int mask = 1;
+        // find the first ones from right to left
+        while ((xor & mask) == 0) {
+            mask = mask << 1;
+        }
+
+        int one = 0, two = 0;
+        for(int num : nums) {
+            if ((mask & num) == 0) {
+                one ^= num;
+            } else {
+                two ^= num;
+            }
+        }
+
+        return new int[]{one, two};
+    }
 }

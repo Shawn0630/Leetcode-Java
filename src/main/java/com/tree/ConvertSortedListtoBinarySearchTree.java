@@ -36,5 +36,4 @@ public class ConvertSortedListtoBinarySearchTree {
     }
 
     // https://zhuanlan.zhihu.com/p/36124969
-
 }

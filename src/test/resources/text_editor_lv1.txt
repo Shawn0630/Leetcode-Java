@@ -1,0 +1,4 @@
+["APPEND", "Hey you", "Hey you"], ["MOVE", "3", "Hey you"], ["APPEND", ",", "Hey, you"]
+["APPEND", "Hey", "Hey"], ["APPEND", " there", "Hey there"], ["APPEND", "!", "Hey there!"]
+["APPEND", "Hello! world!", "Hello! world!"], ["MOVE", "5", "Hello! world!"], ["DELETE", "Hello world!"], ["APPEND", ",", "Hello, world!"]
+["APPEND", "!", "!"], ["DELETE", "!"], ["MOVE", "0", "!"], ["DELETE", ""], ["DELETE", ""]

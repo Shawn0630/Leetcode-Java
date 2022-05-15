@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.function.BiFunction;
 
 public class KClosestPointstoOrigin {
@@ -55,4 +56,87 @@ public class KClosestPointstoOrigin {
         array[l] = pivot;
         return l;
     }
+
+    // PriorityQueue
+    // 3, 1, 2, 4   3
+    // MinQueue   3    1  3    1  2   3    {1}   2   3   4
+    // MaxQueue   3    3  1    3  2   1    {4}   3   2   1
+    public int[][] kClosest2(int[][] points, int k) {
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> distance(b) - distance(a));
+
+        for(int[] point : points) {
+            queue.offer(point);
+            if (queue.size() > k) {
+                queue.poll();
+            }
+        }
+
+        int[][] ans = new int[k][];
+        int idx = 0;
+
+        while (!queue.isEmpty()) {
+            ans[idx++] = queue.poll();
+        }
+        return ans;
+    }
+
+    private int distance(int[] point) {
+        return point[0] * point[0] + point[1] * point[1];
+    }
+
+
+    public int[][] kClosest3(int[][] points, int k) {
+        return topK(points, k);
+    }
+
+    private int[][] topK(int[][] points, int k) {
+        int left = 0, right = points.length - 1;
+
+        while (left <= right) {
+            int index = quickSelect(points, left, right);
+            if (index == k - 1) {
+                break;
+            } else if (index > k - 1){
+                right = index - 1;
+            } else { // index < k
+                left = index + 1;
+            }
+        }
+
+        return Arrays.copyOf(points, k);
+    }
+
+
+    // small  pivot  large
+    private int quickSelect(int[][] points, int left, int right) {
+        int pivot = distance(points[left]);
+        int pivotIndex = left;
+
+        while (left <= right) {
+            while (left <= right && distance(points[left]) <= pivot) left++;
+            while (left <= right && distance(points[right]) >= pivot) right--;
+            if (left < right) {
+                swap(points, left, right);
+            }
+        }
+
+        swap(points, right, pivotIndex);
+
+        return right;
+    }
+
+    // swap between left and right
+    private void swap(int[][] points, int left, int right) {
+        int[] temp = points[left];
+        points[left] = points[right];
+        points[right] = temp;
+    }
+
+
+    public static void main(String[] args) {
+        KClosestPointstoOrigin kClosestPointstoOrigin = new KClosestPointstoOrigin();
+//        kClosestPointstoOrigin.kClosest3(new int[][]{{1, 3}, {-2, 2}}, 1);
+        kClosestPointstoOrigin.kClosest3(new int[][]{{3,3}, {5,-1},{-2,4}}, 2);
+    }
+
 }

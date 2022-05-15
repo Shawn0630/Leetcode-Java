@@ -24,4 +24,36 @@ public class FindtheDuplicateNumber {
 
         return nums[low];
     }
+
+    public int findDuplicate2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int i = 0;
+        while(i < nums.length) {
+            int correctIndex = nums[i] - 1;
+            // current nums not at the right pos
+            if (correctIndex >= 0 && correctIndex < nums.length && nums[correctIndex] != nums[i] ) {
+                swap(nums, correctIndex, i);
+            } else {
+                i++;
+            }
+        }
+
+        for(int j = 0; j < nums.length; j++) {
+            if (nums[j] != j + 1) {
+                return nums[j];
+            }
+        }
+
+        return -1;
+    }
+
+
+    private void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
 }

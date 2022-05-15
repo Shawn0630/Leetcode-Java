@@ -1,0 +1,4 @@
+["APPEND", "Hello, world!", "Hello, world!"], ["SELECT", "7", "12", "Hello, world!"], ["DELETE", "Hello, !"], ["UNDO", "Hello, world!"], ["APPEND", "you", "Hello, you!"]
+["APPEND", "Hello, world!", "Hello, world!"], ["SELECT", "7", "12", "Hello, world!"], ["DELETE", "Hello, !"], ["MOVE", "6", "Hello, !"], ["UNDO", "Hello, world!"], ["UNDO", ""], ["REDO", "Hello, world!"], ["REDO", "Hello, !"]
+["APPEND", "Hello, world!", "Hello, world!"], ["SELECT", "7", "12", "Hello, world!"], ["DELETE", "Hello, !"], ["MOVE", "6", "Hello, !"], ["UNDO", "Hello, world!"], ["UNDO", ""], ["REDO", "Hello, world!"], ["REDO", "Hello, !"], ["UNDO", "Hello, world!"], ["REDO", "Hello, !"], ["REDO", "Hello, !"], ["REDO", "Hello, !"]
+["APPEND", "abcde", "abcde"], ["SELECT", "0", "3", "abcde"], ["CUT", "de"], ["UNDO", "abcde"], ["APPEND", "f", "fde"], ["REDO", "fde"]

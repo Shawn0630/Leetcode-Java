@@ -104,4 +104,76 @@ public class DecodeString {
 
         return sb.toString();
     }
+
+
+
+    /*
+    *   3[a]2[bc]
+    *
+    *    aaa bcbc
+    * */
+    public String decodeString4(String s) {
+        return decodeString4DFS(s, 0).str;
+    }
+
+    private Node decodeString4DFS(String s, int cur) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        int i;
+        for(i = cur; i < s.length(); i++) {
+            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                count = count * 10 + (s.charAt(i) - '0');
+            } else if (s.charAt(i) == '[') {
+                Node remain = decodeString4DFS(s, i + 1);
+                while (count > 0) {
+                    sb.append(remain.str);
+                    count--;
+                }
+                i = remain.next;
+            } else if (s.charAt(i) == ']') {
+                break;
+            } else {
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return new Node(sb.toString(), i);
+    }
+
+    private class Node {
+        String str;
+        int next;
+
+        public Node(String str, int next) {
+            this.str = str;
+            this.next = next;
+        }
+    }
+
+    // 3[a]2[bc]
+    int i = 0;
+    public String decodeString5(String s) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            i++;
+            if (c >= '0' && c <= '9') { // digit
+                count = (count * 10 + c - '0');
+            } else if (c == '[') {
+                String str = decodeString(s);
+                while (count > 0) {
+                    sb.append(str);
+                    count--;
+                }
+            } else if (c == ']') {
+                break;
+            } else {
+                sb.append(c);
+            }
+
+        }
+
+        return sb.toString();
+    }
 }

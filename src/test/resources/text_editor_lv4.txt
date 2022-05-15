@@ -1,0 +1,1 @@
+["CREATE", "document1", ""], ["CREATE", "document2", ""], ["CREATE", "document1", ""], ["SWITCH", "document1", ""], ["APPEND", "Hello, world!", "Hello, world!"], ["SELECT", "7", "12", "Hello, world!"], ["CUT", "Hello, !"], ["SWITCH", "document2", ""], ["PASTE", "world"], ["SWITCH", "document1", ""], ["DELETE", "Hello,!"] llo,!"

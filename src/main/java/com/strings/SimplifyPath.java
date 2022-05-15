@@ -1,7 +1,10 @@
 package com.strings;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 public class SimplifyPath {
     public String simplifyPath(String path) {
@@ -41,6 +44,36 @@ public class SimplifyPath {
             if (dirs.size() > 0) {
                 sb.append('/');
             }
+        }
+
+        return sb.toString();
+    }
+
+    public String simplifyPath2(String path) {
+        String[] dirs = path.split("/");
+        Stack<String> stack = new Stack<>();
+        for(String dir : dirs) {
+            if(dir.length() == 0) continue; // "//"
+            else if (dir.equals(".")) continue;
+            else if (dir.equals("..")) {
+                if(!stack.empty()) {
+                    stack.pop();
+                }
+            } else {
+                stack.push(dir);
+            }
+        }
+
+        List<String> paths = new ArrayList<>();
+        if (stack.empty()) {
+            return "/";
+        }
+        while (!stack.empty()) {
+            paths.add(stack.pop());
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = paths.size() - 1; i >= 0; i--) {
+            sb.append("/" + paths.get(i));
         }
 
         return sb.toString();

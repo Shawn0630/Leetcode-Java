@@ -1,6 +1,7 @@
 package com.search;
 
 public class CountofRangeSum {
+    // https://leetcode.com/problems/count-of-range-sum/discuss/1178174/Java-Clean-Merge-Sort-O(N-logN)-Solution-oror-with-detailed-Explanation
     private int count;
     private int lower;
     private int upper;

@@ -15,4 +15,18 @@ public class ConvertBinaryNumberinaLinkedListtoInteger {
 
         return ans;
     }
+
+
+    public int getDecimalValue2(ListNode head) {
+        int ans = 0;
+
+        ListNode cur = head;
+        while(cur != null) {
+            ans = ans << 1;
+            ans = ans | cur.val;
+            cur = cur.next;
+        }
+
+        return ans;
+    }
 }

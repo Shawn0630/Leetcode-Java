@@ -62,6 +62,18 @@ public class VisualizationUtils {
         }
     }
 
+    public static void configureGraphTracerByGraph(GraphTracer tracer, Map<Integer, List<Integer>> graph) {
+        if(tracer != null && graph != null) {
+            for(Map.Entry<Integer, List<Integer>> node : graph.entrySet()) {
+                tracer.addNode(node.getKey());
+                if (node.getValue() == null) continue;
+                for(Integer neighbour : node.getValue()) {
+                    tracer.addEdge(node.getKey(), neighbour);
+                }
+            }
+        }
+    }
+
     public static void configureSet(Array1DTracer tracer, Set<Integer> set) {
         if (tracer != null && set != null) {
             tracer.set(new ArrayList<>(set));

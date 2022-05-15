@@ -24,4 +24,27 @@ public class SumRoottoLeafNumbers {
             sumDFS(root.right, cur);
         }
     }
+
+    public int sumNumbers2(TreeNode root) {
+        sum = 0;
+        sumNumbersDFS(root, 0);
+
+        return sum;
+    }
+
+    private void sumNumbersDFS(TreeNode root, int curVal) {
+        if (root == null) {
+            return;
+        }
+
+        int val = root.val;
+        int nextVal = curVal * 10 + val;
+        if (root.left == null && root.right == null) {
+            sum = sum + nextVal;
+            return;
+        } else {
+            sumNumbersDFS(root.left, nextVal);
+            sumNumbersDFS(root.right, nextVal);
+        }
+    }
 }

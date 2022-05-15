@@ -1,0 +1,2 @@
+["APPEND", "Hello cruel world!", "Hello cruel world!"], ["SELECT", "5", "11", "Hello cruel world!"], ["APPEND", ",", "Hello, world!"], ["SELECT", "5", "12", "Hello, world!"],["DELETE", "Hello!"], ["SELECT", "4", "6", "Hello!"], ["MOVE", "1", "Hello!"]
+["APPEND", "Hello, world!", "Hello, world!"], ["SELECT", "5", "12", "Hello, world!"], ["CUT",  "Hello!"], ["MOVE", "4", "Hello!"], ["PASTE", "Hell, worldo!"], ["PASTE", "Hell, world, worldo!"]

@@ -6,6 +6,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -120,5 +121,11 @@ public class TestUtils {
         final InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         final CSVParser csvParser = new CSVParser(inputStreamReader, CSVFormat.EXCEL.withFirstRecordAsHeader());
         return csvParser.getRecords();
+    }
+
+    public static List<String> fetchTestCases(String file) {
+        final InputStream inputStream = TestUtils.class.getClassLoader().getResourceAsStream(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        return reader.lines().collect(Collectors.toList());
     }
 }
