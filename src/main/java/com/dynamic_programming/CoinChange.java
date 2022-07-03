@@ -1,5 +1,6 @@
 package com.dynamic_programming;
 
+import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -84,6 +85,43 @@ public class CoinChange {
             counts[remain] = min == Integer.MAX_VALUE ? -1 : min;
             return counts[remain];
         }
+    }
+
+
+    Integer[][] dp;
+    public int coinChange3(int[] coins, int amount) {
+        Arrays.sort(coins);
+        dp = new Integer[coins.length][amount + 1];
+
+        return coinsChange3(coins, coins.length - 1, amount);
+    }
+
+    private int coinsChange3(int[] coins, int i, int amount) {
+        if (i < 0 || amount < 0) {
+            return -1;
+        }
+
+        if (amount == 0) {
+            return 0;
+        }
+
+        if (dp[i][amount] != null) {
+            return dp[i][amount];
+        }
+
+        int keep = coinsChange3(coins, i, amount - coins[i]);
+        int skip = coinsChange3(coins, i - 1, amount);
+        if (keep == -1 && skip == -1) {
+            dp[i][amount] = -1;
+        } else if (keep == -1) {
+            dp[i][amount] = skip;
+        } else if (skip == -1) {
+            dp[i][amount] = keep + 1;
+        } else {
+            dp[i][amount] = Math.min(skip, keep + 1);
+        }
+        // keep + skip
+        return dp[i][amount];
     }
 
     public static void main(String[] args) {

@@ -14,10 +14,12 @@ public class TextEditorLv5 {
     Stack<History> undos;
     Stack<History> redos;
     List<Node> list;
+    String pastboard;
 
     public TextEditorLv5() {
         sb = new StringBuilder();
         list = new LinkedList<>();
+        pastboard = null;
         cursor = 0;
         selection = null;
         undos = new Stack<>();
@@ -135,6 +137,27 @@ public class TextEditorLv5 {
         return printList();
     }
 
+    private String copy() {
+        if (selection != null) {
+            pastboard = subList(selection.start, selection.end);
+        }
+
+        return printList();
+    }
+
+    private String cut() {
+        if (selection != null) {
+            redos.clear();
+            undos.push(History.copy(this));
+
+            copy();
+            backspace();
+            selection = null;
+        }
+
+        return printList();
+    }
+
     private List<Node> buildNodes(String str) {
         List<Node> nodes = new ArrayList<>();
 
@@ -169,6 +192,15 @@ public class TextEditorLv5 {
             if (node.isBold()) {
                 stringBuilder.append("*");
             }
+            stringBuilder.append(node.c);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    private String subList(int start, int end) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Node node : this.list.subList(start, end)) {
             stringBuilder.append(node.c);
         }
 
@@ -227,6 +259,11 @@ public class TextEditorLv5 {
                     int end = Integer.parseInt(operation[3]);
                     this.select(start, end);
                     break;
+                case "CUT":
+                    this.cut();
+                    break;
+                case "COPY":
+                    this.copy();
                 case "BOLD":
                     this.bold();
                     break;

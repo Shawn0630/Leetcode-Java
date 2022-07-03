@@ -37,9 +37,33 @@ public class WordBreakII {
         }
     }
 
+    List<String> ans;
+    public List<String> wordBreak2(String s, List<String> wordDict) {
+        ans = new ArrayList<>();
+        wordBreak2DFS(s, "", wordDict);
+
+        return ans;
+    }
+
+    private void wordBreak2DFS(String s, String cur, List<String> wordDict) {
+        if (s == null || s.length() == 0) {
+            ans.add(cur);
+            return;
+        }
+
+
+        for(int i = 1; i <= s.length(); i++) {
+            String word = s.substring(0, i);
+            if (wordDict.contains(word)) {
+                wordBreak2DFS(s.substring(i), cur.isEmpty() ? word : cur + " " + word, wordDict);
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         WordBreakII wb = new WordBreakII();
         wb.wordBreak("catsanddog", Arrays.asList("cat","cats","and","sand","dog"));
+        wb.wordBreak2("catsanddog", Arrays.asList("cat","cats","and","sand","dog"));
     }
 }

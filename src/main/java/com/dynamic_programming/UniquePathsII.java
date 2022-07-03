@@ -43,5 +43,42 @@ public class UniquePathsII {
         return dp[obstacleGrid.length - 1][obstacleGrid[0].length - 1];
     }
 
+    Integer[][] dp;
+    public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        dp = new Integer[m][n];
+
+        return uniquePathsWithObstacles2(obstacleGrid, m - 1, n - 1);
+    }
+
+    private int uniquePathsWithObstacles2(int[][] grid, int x, int y) {
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length) {
+            return 0;
+        }
+
+        if (dp[x][y] != null) {
+            return dp[x][y];
+        }
+
+        if (grid[x][y] == 1) {
+            dp[x][y] = 0;
+            return dp[x][y];
+        }
+
+        if (x == 0 && y == 0) {
+            dp[x][y] = (grid[0][0] == 1 ? 0 : 1);
+            return dp[x][y];
+        }
+
+        int sum = 0;
+        sum += uniquePathsWithObstacles2(grid, x - 1, y);
+        sum += uniquePathsWithObstacles2(grid, x, y - 1);
+
+        dp[x][y] = sum;
+        return dp[x][y];
+    }
+
+
 
 }

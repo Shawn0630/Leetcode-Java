@@ -2,7 +2,7 @@ package com.interviews.dropbox.ID_generator;
 
 import java.util.BitSet;
 
-public class BitSetIDGenerator implements IDGenerator<Integer, Integer> {
+public class BitSetIDGenerator implements IDGenerator {
     BitSet bitSet;
 
     private static int MAX_ID;
@@ -14,7 +14,7 @@ public class BitSetIDGenerator implements IDGenerator<Integer, Integer> {
         this.nextAvailable = 0;
     }
     @Override
-    public Integer allocate() {
+    public int allocate() {
         if (nextAvailable >= MAX_ID) return -1;
         int num = nextAvailable;
         bitSet.set(num);
@@ -24,7 +24,7 @@ public class BitSetIDGenerator implements IDGenerator<Integer, Integer> {
     }
 
     @Override
-    public void release(Integer id) {
+    public void release(int id) {
         if (id < 0 || id >= MAX_ID) return;
         if(bitSet.get(id)) {
             bitSet.clear(id);
@@ -33,8 +33,13 @@ public class BitSetIDGenerator implements IDGenerator<Integer, Integer> {
 
     }
 
+    // allocate 0 1 2
+    // release 1
+    // release 2
+    // 1 ...
+
     @Override
-    public boolean check(Integer id) {
+    public boolean check(int id) {
         if (id < 0 || id >= MAX_ID) return false;
         return !bitSet.get(id);
     }

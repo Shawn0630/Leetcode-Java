@@ -14,4 +14,19 @@ public class Numberof1Bits {
 
         return count;
     }
+
+    public int hammingWeight2(int n) {
+        int counter = 0;
+        for(int i = 0; i < 32; i++) {
+            if ((n & (1 << i)) != 0) {
+                counter++;
+            }
+        }
+
+        return counter;
+        // 0001
+        // 0010
+        // 0100
+        // 1000
+    }
 }

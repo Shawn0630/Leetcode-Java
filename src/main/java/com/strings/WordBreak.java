@@ -88,8 +88,6 @@ public class WordBreak {
             return cur.isWord;
         }
     }
-
-
     public static void main(String[] arg) {
         WordBreak wordBreak = new WordBreak();
         wordBreak.wordBreak("abcd", Arrays.asList("a","abc","b","cd"));

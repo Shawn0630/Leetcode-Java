@@ -80,39 +80,87 @@ public class SummaryRanges {
 //    }
 
     // https://leetcode.com/problems/data-stream-as-disjoint-intervals/discuss/1693523/Java-Solution-or-Binary-Search-or-TreeMap
+//
+//    TreeMap<Integer, Integer> treeMap;
+//    public SummaryRanges() {
+//        treeMap = new TreeMap<>();
+//    }
+//
+//    //      [3, 5]   [7, 8]
+//    // 1
+//    // 2
+//    // 4
+//    // 6
+//    // 7
+//    public void addNum(int val) {
+//        int start = val;
+//        int end = val;
+//
+//        Integer floor = treeMap.floorKey(val);
+//
+//        if (floor != null) {
+//            int floorEnd = treeMap.get(floor);
+//            if (val <= floorEnd) {
+//                return;
+//            } else if (val == floorEnd + 1){
+//                start = floor;
+//                treeMap.remove(floor);
+//            }
+//        }
+//
+//        Integer ceil = treeMap.ceilingKey(val);
+//        if (ceil != null) {
+//            if (val == ceil - 1) {
+//                end = treeMap.get(ceil);
+//                treeMap.remove(ceil);
+//            }
+//        }
+//
+//        treeMap.put(start, end);
+//    }
+//
+//    public int[][] getIntervals() {
+//        int[][] ans = new int[treeMap.size()][2];
+//
+//        int idx = 0;
+//        for(Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
+//            ans[idx][0] = entry.getKey();
+//            ans[idx++][1] = entry.getValue();
+//        }
+//
+//        return ans;
+//    }
+
+
 
     TreeMap<Integer, Integer> treeMap;
     public SummaryRanges() {
         treeMap = new TreeMap<>();
     }
 
-    //      [3, 5]   [7, 8]
-    // 1
-    // 2
-    // 4
-    // 6
-    // 7
+    //  [3, 5] [7, 8]
+    //      7
     public void addNum(int val) {
         int start = val;
         int end = val;
 
-        Integer floor = treeMap.floorKey(val);
-
-        if (floor != null) {
-            int floorEnd = treeMap.get(floor);
-            if (val <= floorEnd) {
-                return;
-            } else if (val == floorEnd + 1){
-                start = floor;
-                treeMap.remove(floor);
+        Integer ceilKey = treeMap.ceilingKey(val);
+        if (ceilKey != null) {
+            if (ceilKey - val == 1) {
+                end = treeMap.get(ceilKey);
+                treeMap.remove(ceilKey);
             }
         }
 
-        Integer ceil = treeMap.ceilingKey(val);
-        if (ceil != null) {
-            if (val == ceil - 1) {
-                end = treeMap.get(ceil);
-                treeMap.remove(ceil);
+
+        Integer floorKey = treeMap.floorKey(val);
+        if (floorKey != null) {
+            int floorEnd = treeMap.get(floorKey);
+            if (val - floorEnd == 1) {
+                start = floorKey;
+                treeMap.remove(floorKey);
+            } else if (val <= floorEnd) {
+                return;
             }
         }
 
@@ -120,15 +168,13 @@ public class SummaryRanges {
     }
 
     public int[][] getIntervals() {
-        int[][] ans = new int[treeMap.size()][2];
-
+        int[][] output = new int[treeMap.size()][2];
         int idx = 0;
         for(Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
-            ans[idx][0] = entry.getKey();
-            ans[idx++][1] = entry.getValue();
+            output[idx++] = new int[]{entry.getKey(), entry.getValue()};
         }
 
-        return ans;
+        return output;
     }
 
 }
